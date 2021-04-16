@@ -4,7 +4,7 @@ import platform
 import subprocess
 import slackweb
 
-# Set up slack notifier
+# Set up slack notifier -- Change this to match your webhook address
 slack = slackweb.Slack(url="https://hooks.slack.com/services/<slackwebhookaddress>")
 
 
