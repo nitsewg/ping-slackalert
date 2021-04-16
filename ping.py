@@ -36,6 +36,7 @@ while 1 == 1:
 
             if ping_ip(ip):
                 if host in downhosts:
+                    slack.notify(text=time.strftime("%m/%d/%Y - %H:%M:%S") + " [***] " + ip + " - " + host + " appears to be back up", username="Arthur-Dent", icon_emoji=":rocket:")
                     downhosts.remove(host)
             else:
                 if host in downhosts:
