@@ -42,11 +42,11 @@ while 1 == 1:
                 if host in downhosts:
                     # Feel free to change the username and emoji on this 
                     # section, and the other slack.notify section.
-                    slack.notify(text=time.strftime(
-                        "%m/%d/%Y - %H:%M:%S") + " [***] " + ip + " - " 
-                                      + host + " appears to be back up", 
-                                      username="Arthur-Dent", 
-                                      icon_emoji=":rocket:")
+                    slack.notify(text=time.strftime("%m/%d/%Y - %H:%M:%S")
+                                 + " [***] " + ip + " - " 
+                                 + host + " appears to be back up", 
+                                 username="Arthur-Dent", 
+                                 icon_emoji=":rocket:")
                     downhosts.remove(host)
             else:
                 if host in downhosts:
@@ -55,9 +55,9 @@ while 1 == 1:
                     print("host down " + host)
                     print(downhosts)
                     message = "Host offline " + host + ip
-                    slack.notify(text=time.strftime(
-                        "%m/%d/%Y - %H:%M:%S") + " [***] " + ip + " - "
-                                      + host + " appears down", 
-                                      username="Arthur-Dent",
-                                      icon_emoji=":rocket:")
+                    slack.notify(text=time.strftime("%m/%d/%Y - %H:%M:%S")
+                                 + " [***] " + ip + " - "
+                                 + host + " appears down", 
+                                 username="Arthur-Dent",
+                                 icon_emoji=":rocket:")
                     downhosts = downhosts + [host]
