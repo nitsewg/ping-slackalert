@@ -5,22 +5,26 @@ import subprocess
 import slackweb
 
 # Set up slack notifier -- Change this to match your webhook address
-slack = slackweb.Slack(url="https://hooks.slack.com/services/<slackwebhookaddress>")
-
-
+slack = slackweb.Slack(
+    url="https://hooks.slack.com/services/<slackwebhookaddress>")
 
 downhosts = []
 
 
 def ping_ip(ip):
+    # ip shadows "ip" from outer scope - PEP8
     try:
-        output = subprocess.check_output("ping -{} 1 {}".format('n' if platform.system().lower(
-        ) == "windows" else 'c', ip), shell=True, universal_newlines=True)
+        output = subprocess.check_output(
+            "ping -{} 1 {}".format(
+                'n' if platform.system().lower() == "windows" else 'c', ip), 
+            shell=True, 
+            universal_newlines=True)
         if 'unreachable' in output:
             return False
         else:
             return True
     except Exception:
+        # Too broad clause - PEP8 Error
         return False
 
 
@@ -36,8 +40,13 @@ while 1 == 1:
 
             if ping_ip(ip):
                 if host in downhosts:
-                    # Feel free to change the username and emoji on this section, and the other slack.notify section.
-                    slack.notify(text=time.strftime("%m/%d/%Y - %H:%M:%S") + " [***] " + ip + " - " + host + " appears to be back up", username="Arthur-Dent", icon_emoji=":rocket:")
+                    # Feel free to change the username and emoji on this 
+                    # section, and the other slack.notify section.
+                    slack.notify(text=time.strftime(
+                        "%m/%d/%Y - %H:%M:%S") + " [***] " + ip + " - " 
+                                      + host + " appears to be back up", 
+                                      username="Arthur-Dent", 
+                                      icon_emoji=":rocket:")
                     downhosts.remove(host)
             else:
                 if host in downhosts:
@@ -46,6 +55,9 @@ while 1 == 1:
                     print("host down " + host)
                     print(downhosts)
                     message = "Host offline " + host + ip
-                    slack.notify(text=time.strftime("%m/%d/%Y - %H:%M:%S") + " [***] " + ip + " - " + host + " appears down", username="Arthur-Dent", icon_emoji=":rocket:")
+                    slack.notify(text=time.strftime(
+                        "%m/%d/%Y - %H:%M:%S") + " [***] " + ip + " - "
+                                      + host + " appears down", 
+                                      username="Arthur-Dent",
+                                      icon_emoji=":rocket:")
                     downhosts = downhosts + [host]
-
